@@ -1,0 +1,6 @@
+@RadicalExam_HostAddress = http://localhost:5022
+
+GET {{RadicalExam_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
