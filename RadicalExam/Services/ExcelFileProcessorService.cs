@@ -47,21 +47,56 @@ namespace RadicalExam.Services
                     IRow row = sheet.GetRow(iRow);
                     if (row is not null)
                     {
-                        int cellCount = row.LastCellNum;
+                        ICell cell = null;
                         var record = new ExcelRecord();
-                        for (int iColumn = 0; iColumn < cellCount; iColumn++)
-                        {
-                            ICell cell = row.GetCell(iColumn);
-                            if (cell is not null)
-                            {
-                                string cellValue = cell.ToString();
-                                record.Cells.Add(cellValue);
-                            }
-                            else
-                            {
-                                record.Cells.Add("");
-                            }
-                        }
+
+                        cell = row.GetCell(0);
+                        record.FirstName = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(1);
+                        record.MiddleName = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(2);
+                        record.FirstLastName = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(3);
+                        record.SecondLastName = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(4);
+                        record.Birthdate = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(5);
+                        record.RFC = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(6);
+                        record.Neighborhood = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(7);
+                        record.DelegationOrMunicipality = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(8);
+                        record.City = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(9);
+                        record.State = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(10);
+                        record.ZipCode = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(11);
+                        record.Address = cell is not null ? cell.ToString() : "";
+
+                        cell = row.GetCell(12);
+                        record.CurrentBalance = cell is not null ? decimal.Parse(cell.ToString()) : 0.0m;
+
+                        cell = row.GetCell(13);
+                        record.CreditLimit = cell is not null ? decimal.Parse(cell.ToString()) : 0.0m;
+
+                        cell = row.GetCell(14);
+                        record.BalanceDue = cell is not null ? decimal.Parse(cell.ToString()) : 0.0m;
+
+                        record.AvailableBalance = record.CreditLimit - record.CurrentBalance;
+
                         document.Records.Add(record);
                     }
                 }

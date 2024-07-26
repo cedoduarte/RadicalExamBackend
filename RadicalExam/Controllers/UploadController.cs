@@ -19,7 +19,7 @@ namespace RadicalExam.Controllers
         {
             if (inputFile is null || inputFile.Length == 0)
             {
-                return BadRequest("You did not upload any file!");
+                return BadRequest("¡No se subió ningún archivo!");
             }
             var result = _excelFileProcessorService.ReadFile(inputFile);
             if (result.Records.Any())
@@ -28,7 +28,7 @@ namespace RadicalExam.Controllers
             }
             else
             {
-                return BadRequest("The Excel file is empty!");
+                return BadRequest("¡El archivo de Excel está vacío!");
             }
         }
     }
