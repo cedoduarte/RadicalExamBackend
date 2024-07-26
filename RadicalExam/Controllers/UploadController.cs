@@ -15,7 +15,7 @@ namespace RadicalExam.Controllers
         }
 
         [HttpPost("upload")]
-        public async Task<IActionResult> Upload(IFormFile inputFile)
+        public async Task<IActionResult> Upload([FromForm(Name = "file")] IFormFile inputFile)
         {
             if (inputFile is null || inputFile.Length == 0)
             {
