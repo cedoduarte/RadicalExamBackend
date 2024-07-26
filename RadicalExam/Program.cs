@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using RadicalExam.Middlewares;
+using RadicalExam.Services;
 
 namespace RadicalExam
 {
@@ -54,6 +55,8 @@ namespace RadicalExam
                     }
                 });
             });
+
+            builder.Services.AddTransient<IExcelFileProcessorService, ExcelFileProcessorService>();
             /*
             builder.Services.AddTransient<IAppDbContext, AppDbContext>();
             builder.Services.AddTransient<IArtExhibitionService, ArtExhibitionService>();
