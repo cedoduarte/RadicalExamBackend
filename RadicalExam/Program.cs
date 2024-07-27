@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
-using RadicalExam.Middlewares;
 using RadicalExam.Services;
 
 namespace RadicalExam
@@ -55,63 +54,11 @@ namespace RadicalExam
                     }
                 });
             });
-
+            builder.Services.AddTransient<IBanxicoService, BanxicoService>();
+            builder.Services.AddTransient<IWeatherTemperatureService, WeatherTemperatureService>();
             builder.Services.AddTransient<IExcelFileProcessorService, ExcelFileProcessorService>();
-            /*
-            builder.Services.AddTransient<IAppDbContext, AppDbContext>();
-            builder.Services.AddTransient<IArtExhibitionService, ArtExhibitionService>();
-            builder.Services.AddTransient<IArtisticWorkService, ArtisticWorkService>();
-            builder.Services.AddTransient<IProductService, ProductService>();
-            builder.Services.AddTransient<ITextService, TextService>();
-            builder.Services.AddTransient<IThumbnailService, ThumbnailService>();
-            builder.Services.AddTransient<IUserService, UserService>();
-            */
-
-            /*
-            builder.Services.AddSingleton(new MapperConfiguration(configuration =>
-            {
-                configuration.AddProfile(new MappingProfile());
-            }).CreateMapper());
-            */
-
-            /*
-            builder.Services.AddMediatR(configuration =>
-            {
-                configuration.RegisterServicesFromAssembly(typeof(Program).Assembly);
-            });
-            */
-
-            /*
-            string dbConnectionString = builder.Configuration.GetConnectionString("luisdiego");
-            builder.Services.AddDbContext<IAppDbContext, AppDbContext>(options =>
-            {
-                options.UseMySql(dbConnectionString, ServerVersion.AutoDetect(dbConnectionString), sqlOptions =>
-                {
-                    sqlOptions.MigrationsAssembly(typeof(AppDbContext).GetTypeInfo().Assembly.GetName().Name);
-                });
-            });
-            */
-
             builder.Services.AddMvc();
             var app = builder.Build();
-            
-            /*
-            using (IServiceScope scope = app.Services.CreateScope())
-            {
-                try
-                {
-                    AppDbContext dbContext = (AppDbContext)scope.ServiceProvider.GetService<IAppDbContext>();
-                    dbContext.Database.Migrate();
-                    DbSeeder.DoSeeding(dbContext);
-                }
-                catch (Exception ex)
-                {
-                    ILogger<Program> logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error ocurred while migrating or initializing the database");
-                }
-            }
-            */
-
             app.UseCors(options =>
                 options.AllowAnyOrigin()
                        .AllowAnyHeader()
@@ -126,7 +73,6 @@ namespace RadicalExam
                 });
             }
             app.UseHttpsRedirection();
-            //app.UseAuthorizationToken(builder.Configuration["AuthorizationToken"]);
             app.MapControllers();
             app.Run();
         }

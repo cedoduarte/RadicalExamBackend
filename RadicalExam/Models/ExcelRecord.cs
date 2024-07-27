@@ -1,5 +1,5 @@
 ﻿
-namespace RadicalExam.DTOs
+namespace RadicalExam.Models
 {
     public class ExcelRecord
     {
