@@ -1,4 +1,4 @@
-# My Web Application
+# Radical Exam - Backend application - Carlos Enrique Duarte Ortiz
 
 ## Overview
 
@@ -20,5 +20,4 @@ Follow these steps to get your development environment set up:
 Clone the project repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/your-repo.git
-
+git clone https://github.com/cedoduarte/RadicalExamBackend.git
